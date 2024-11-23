@@ -11,9 +11,9 @@ This is my Java swing projects (has no license) I have been developing since 202
 
 ## Repository Structure 🔰
 This repository is organized into three main sections, each serving a distinct purpose:
-- **Cheat Sheet Concepts** - Foundational knowledge, Key principles, And Techniques
-- **App Projects** - A collection of fully implemented app projects
-- **Game Projects** - Game development skills, Creativity, And Technical expertise.
+- **Cheat-Sheet-Concepts** - Foundational knowledge, Key principles, And Techniques
+- **Source-Code-App-Projects** - A collection of fully implemented app projects
+- **Source-Code-Game-Projects** - Game development skills, Creativity, And Technical expertise.
 
 ## Support This Repository ☕
 

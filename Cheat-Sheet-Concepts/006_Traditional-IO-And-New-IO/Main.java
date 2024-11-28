@@ -16,7 +16,7 @@ public class Main {
 
         bufferedWriter.newLine();
         bufferedWriter.write("Hello World");
-
+        
         bufferedWriter.close();
         writer.close();
 
@@ -95,5 +95,17 @@ public class Main {
         while (byteBuffer.hasRemaining()) {
             System.out.print((char) byteBuffer.get());
         }
+
+        //==================================================================================
+        //================================= ADDITIONAL IO ==================================
+
+        // ========= PRINT WRITER =========
+        // PrintWriter can write any data types (int float boolean ...) with formatted text (print , println , printf)
+        // - .flush()         -> used for clear data from buffer (.close() is not required)
+        PrintWriter pw = new PrintWriter(new FileWriter("output.txt"), true);
+        pw.println("Hello, File!");
+        pw.println("This is an example of writing to a file using PrintWriter.");
+        pw.printf("Formatted number: %.2f%n", 123.456);
+        pw.flush();
     }
 }

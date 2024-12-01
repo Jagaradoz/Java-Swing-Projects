@@ -1,5 +1,3 @@
-package application;
-
 // LAMBDA EXPRESSIONS
 // Convert an anonymous function to a shorter form: () -> {}
 // Functional Interface:

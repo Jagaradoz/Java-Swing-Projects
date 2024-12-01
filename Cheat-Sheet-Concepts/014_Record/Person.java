@@ -1,5 +1,3 @@
-package application;
-
 // RECORD
 // A special class introduced in Java to represent immutable data objects.
 // Key features of records:

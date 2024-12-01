@@ -1,5 +1,3 @@
-package application;
-
 class MyClass {
     private final String message;
     public static int staticCounter = 0;

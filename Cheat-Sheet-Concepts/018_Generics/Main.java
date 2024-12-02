@@ -27,6 +27,9 @@ public class Main {
         // BOUNDED TYPE PARAMETER
         printNumber(42);
         printNumber(3.14);
+
+        List<?> list = new ArrayList<String>();
+        List<? extends Number> list = new ArrayList<Integer>();
     }
 
     public static <T> void printArray(T[] array) {

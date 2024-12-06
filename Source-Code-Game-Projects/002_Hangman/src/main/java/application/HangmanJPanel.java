@@ -307,7 +307,7 @@ public class HangmanJPanel extends JPanel {
 
         gitHub.addActionListener(_ -> {
             try {
-                Desktop.getDesktop().browse(new URI("https://github.com/Jagaradoz/Java-Projects"));
+                Desktop.getDesktop().browse(new URI("https://github.com/Jagaradoz/Java-Swing-Projects"));
             } catch (IOException | URISyntaxException ex) {
                 throw new RuntimeException(ex);
             }

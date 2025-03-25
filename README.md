@@ -1,20 +1,23 @@
 # Java Swing Projects 💻
 
-This Java Swing project, developed since 2025 for my presentation, showcases my skills in Java programming, problem-solving, and GUI development. By sharing this work, I hope to inspire and assist others in their Java journey. Feel free to explore and use the provided code as a resource!
+Since 2025, I have developed this Java Swing project as my back for a presentation that all demonstrates my knowledge of Java Programming language, Debugging Skills, and GUI Development. I want to share this work to give others inspiration and assistance with Java. Enjoy browsing the code as reference.
 
 ![Static Badge](https://img.shields.io/badge/JDK%20-v23-blue) ![Static Badge](https://img.shields.io/badge/JUnit-v5-red) ![Static Badge](https://img.shields.io/badge/Mockito-v3-lime)
 
+# What is Java (Swing)? 🤔
 
-## What is Java (Swing)? 🤔
+Java is an object-oriented programming language. Swing is a part of Java Foundation Classes (JFC), and it is a lightweight GUI toolkit which is used to create desktop-based applications with components such as buttons, text fields, and tables.
 
-Java is a powerful, object-oriented language known for its platform independence. Swing, part of Java Foundation Classes (JFC), is a lightweight GUI toolkit for building desktop applications with components like buttons, text fields, and tables.
+# Repository Structure 🔰
 
-## Repository Structure 🔰
-This repository is organized into three main sections, each serving a distinct purpose:
-- **App-Projects** - A collection of fully implemented app projects
-- **Game-Projects** - Game development skills, Creativity, And Technical expertise.
-- **Programming-Concepts** - Foundational knowledge, Key principles, And Techniques
+This repository consists of 3 main sections with different purposes:
 
-## Support This Repository ☕
+- **App-Projects**: Fully functional app projects
 
-If you find this helpful, consider starring ⭐ and following for updates. Your support keeps me motivated. thank you!
+- **Game-Projects**: Skills of game development, creativity and technical expertise.
+
+- **Programming Concepts**: Core Knowledge, Main ideas, And Tricks.
+
+# Show Your Support for This Repository ☕
+
+If you find this github repository valuable, please consider giving it a star ⭐ and following for updates. Your encouragement truly keeps me motivated. Thank you so much!

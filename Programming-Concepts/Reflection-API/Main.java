@@ -4,31 +4,30 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException, ClassNotFoundException, NoSuchFieldException {
-        // ========= CREATION =========
-        // person1      -> instantiates normally
-        // person2      -> uses reflection
-        // person3      -> uses reflection
+        // Creation:
+        // person1      -> Instantiates normally.
+        // person2      -> Uses reflection.
+        // person3      -> Uses reflection.
         Person person1 = new Person();
         Person person2 = Person.class.getDeclaredConstructor().newInstance();
         Class<?> person3 = Class.forName("Person");
 
-        // ========= GET FIELDS =========
-        // .getDeclaredField(name)      -> gives public private protected default field
-        // .getFields(name)             -> gives public field
-        // .getClass()                  -> happens at runtime
-        // Class.class                  -> happens at compile time
-        // .getGenericType()            -> gets generic type of the field
+        // Get fields:
+        // .getDeclaredField(name)      -> Gives public, private, protected, default field.
+        // .getFields(name)             -> Gives public field.
+        // .getClass()                  -> Happens at runtime.
+        // Class.class                  -> Happens at compile time.
+        // .getGenericType()            -> Gets generic type of the field.
         Field field1 = person1.getClass().getDeclaredField("count");
         Field[] fields1 = person1.getClass().getDeclaredFields();
         Field field2 = Person.class.getField("name");
         Field[] fields2 = Person.class.getFields();
         Type type = Person.class.getDeclaredField("list").getGenericType();
 
-
-        // ========= GET METHODS =========
-        // .getDeclaredMethod(name)      -> gives public private protected default method
-        // .getMethods(name)             -> gives public method
-        // .invoke(object,args...)       -> invoke methods
+        // Get methods:
+        // .getDeclaredMethod(name)      -> Gives public, private, protected, default method.
+        // .getMethods(name)             -> Gives public method.
+        // .invoke(object, args...)      -> Invoke methods.
         Method method1 = person1.getClass().getDeclaredMethod("printCount", String.class);
         Method[] methods1 = person1.getClass().getDeclaredMethods();
         Method method2 = Person.class.getMethod("printName", String.class);
@@ -36,13 +35,12 @@ public class Main {
         method1.invoke(person1, "Hello");
         method2.invoke(person1, "Hello");
 
-
-        // ========= ADDITIONAL METHODS =========
-        // .getConstructors()               -> gets constructor (public)
-        // .getDeclaredConstructors()       -> gets constructor from class (public private protected default)
-        // .getParameterTypes()             -> gets parameter types
-        // .getModifiers()                  -> gets modifiers
-        // .getAnnotations()                -> gets annotations
+        // Additional methods:
+        // .getConstructors()               -> Gets constructor (public).
+        // .getDeclaredConstructors()       -> Gets constructor from class (public, private, protected, default).
+        // .getParameterTypes()             -> Gets parameter types.
+        // .getModifiers()                  -> Gets modifiers.
+        // .getAnnotations()                -> Gets annotations.
     }
 }
 
@@ -66,4 +64,3 @@ class Person {
         System.out.println("Name : " + name);
     }
 }
-

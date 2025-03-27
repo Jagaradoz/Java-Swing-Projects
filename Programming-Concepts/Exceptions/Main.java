@@ -5,42 +5,41 @@ import java.util.concurrent.TimeoutException;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // ========= HANDLING EXCEPTIONS SYNTAX =========
-        // try          -> Code inside that may throw an exception
-        // catch        -> Handles the exception
-        // finally      -> Code inside that will always run
+        // Handling Exceptions Syntax:
+        // Try          -> Code inside that may throw an exception.
+        // Catch        -> Handles the exception.
+        // Finally      -> Code inside that will always run.
         try {
-            // code...
+            // Code...
         } catch (Exception e) {
-            // handles the exception...
+            // Handles the exception...
         } finally {
-            // code...
+            // Code...
         }
 
-
-        // ========= THROW VS THROWS =========
-        // throw                                      -> used for creating a new exception and throw it.
-        // throws                                     -> used for telling method that this method might have exception
+        // Throw and Throws:
+        // Throw                                      -> Used for creating a new exception and throw it.
+        // Throws                                     -> Used for telling method that this method might have exception.
         throw new ArithmeticException("Error occurred");
         public void method() throws NullPointerException { ... }
 
 
-        // ========= TYPE OF EXCEPTIONS =========
-        // ArithmeticException                      -> an invalid arithmetic operation occurs (e.g., divide by zero).
-        // NullPointerException                     -> trying to access an object or method on a null reference.
-        // ArrayIndexOutOfBoundsException           -> accessing an invalid index of an array.
-        // ClassCastException                       -> an object is cast to a type it's not compatible with.
-        // IllegalArgumentException                 -> a method receives an illegal or inappropriate argument.
-        // IllegalStateException                    -> a method is called at an illegal or inappropriate time.
-        // IOException                              -> an I/O operation fails or is interrupted.
-        // FileNotFoundException                    -> a file with the specified pathname cannot be found.
-        // SQLException                             -> database access errors occur.
-        // NumberFormatException                    -> a string cannot be converted to a number.
-        // TimeoutException                         -> a blocking operation times out.
-        // InterruptedException                     -> a thread is interrupted while waiting, sleeping, or performing some other operation.
-        // IndexOutOfBoundsException                -> trying to access an index outside the valid range of a list or array.
-        // NoSuchElementException                   -> one tries to access an element that is absent in a collection.
-        // UnsupportedOperationException            -> an unsupported operation is attempted on an object.
+        // Type of Exceptions:
+        // ArithmeticException                      -> An invalid arithmetic operation occurs (e.g., divide by zero).
+        // NullPointerException                     -> Trying to access an object or method on a null reference.
+        // ArrayIndexOutOfBoundsException           -> Accessing an invalid index of an array.
+        // ClassCastException                       -> An object is cast to a type it's not compatible with.
+        // IllegalArgumentException                 -> A method receives an illegal or inappropriate argument.
+        // IllegalStateException                    -> A method is called at an illegal or inappropriate time.
+        // IOException                              -> An I/O operation fails or is interrupted.
+        // FileNotFoundException                    -> A file with the specified pathname cannot be found.
+        // SQLException                             -> Database access errors occur.
+        // NumberFormatException                    -> A string cannot be converted to a number.
+        // TimeoutException                         -> A blocking operation times out.
+        // InterruptedException                     -> A thread is interrupted while waiting, sleeping, or performing some other operation.
+        // IndexOutOfBoundsException                -> Trying to access an index outside the valid range of a list or array.
+        // NoSuchElementException                   -> One tries to access an element that is absent in a collection.
+        // UnsupportedOperationException            -> An unsupported operation is attempted on an object.
         throw new ArithmeticException("Cannot divide by zero");
         throw new NullPointerException("Object is null");
         throw new ArrayIndexOutOfBoundsException("Index out of bounds");
@@ -58,7 +57,7 @@ public class Main {
         throw new UnsupportedOperationException("Operation not supported");
 
 
-        // ========= CUSTOM EXCEPTIONS =========
+        // Custom Exceptions
         try {
             validateAge(15);
         } catch (InvalidAgeException e) {

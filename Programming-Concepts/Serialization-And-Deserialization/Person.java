@@ -7,7 +7,7 @@ class Person implements Serializable {
 
     private final String name;
     private final int age;
-    private final transient String password; // transient are not serialized
+    private final transient String password; // Transient are not serialized.
 
     public Person(String name, int age, String password) {
         this.name = name;

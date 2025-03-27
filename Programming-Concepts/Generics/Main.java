@@ -1,9 +1,6 @@
-// GENERICS
-// provides <...> that can put wrapper classes
-// to specify data type in (classes,methods)
 public class Main {
     public static void main(String[] args) {
-        // NORMAL GENERICS
+        // Normal Generics
         Box<Integer> integerBox = new Box<>();
         Box<String> stringBox = new Box<>();
 
@@ -13,18 +10,15 @@ public class Main {
         System.out.println("Integer Box contains: " + integerBox.get());
         System.out.println("String Box contains: " + stringBox.get());
 
-
-        // MULTIPLE GENERICS
+        // Multiple Generics
         Pair<Integer, String> pair = new Pair<>(1, "One");
         System.out.println("Key: " + pair.getKey() + ", Value: " + pair.getValue());
 
-
-        // METHOD GENERICS
+        // Method Generics
         printArray(new Integer[]{1, 2, 3});
         printArray(new String[]{"A", "B", "C"});
 
-
-        // BOUNDED TYPE PARAMETER
+        // Bounded Type Parameter
         printNumber(42);
         printNumber(3.14);
 

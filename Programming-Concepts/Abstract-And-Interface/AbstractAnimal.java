@@ -1,30 +1,27 @@
+// Abstract Class:
+// It is a class that cannot be instantiated.
+// It mainly used to be inherited.
+// It can contain concrete methods and abstract methods.
 abstract class AbstractAnimal {
     private String name;
 
-    // CONSTRUCTOR
     public AbstractAnimal(String name) {
         this.name = name;
     }
 
-    // GETTER
     public String getName() {
         return name;
     }
 
-    // SETTER
     public void setName(String name) {
         this.name = name;
     }
 
-    // ABSTRACT METHOD
     public abstract void makeSound();
 }
 
-
-
-// CHILD-CLASS
+// Example Implementation:
 class Cat extends AbstractAnimal {
-    // CONSTRUCTOR
     public Cat(String name) {
         super(name);
     }
@@ -35,9 +32,8 @@ class Cat extends AbstractAnimal {
     }
 }
 
-// CHILD-CLASS
+// Example Implementation:
 class Dog extends AbstractAnimal {
-    // CONSTRUCTOR
     public Dog(String name) {
         super(name);
     }

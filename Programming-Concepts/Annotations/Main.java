@@ -15,13 +15,13 @@ public class Main {
     }
 
     public static void main(String[] args) throws NoSuchFieldException, InvocationTargetException, IllegalAccessException {
-        // gets declared fields array and declared methods array
+        // Gets declared fields array and declared methods array
         Field[] fields = Main.class.getDeclaredFields();
         Method[] methods = Main.class.getDeclaredMethods();
 
-        // loops through fields
-        for (Field field : fields) {
-            // if field's annotation is StaticField , print it!
+        // Loops through fields:
+        // If field's annotation is StaticField , print it!
+        for (Field field : fields) {            
             if (field.isAnnotationPresent(StaticField.class)) {
                 Annotation[] annotations = field.getAnnotations();
                 System.out.println("Annotations: " + Arrays.toString(annotations));
@@ -30,14 +30,14 @@ public class Main {
 
         System.out.println();
 
-        // loops through methods
+        // Loops through methods:
+        // If method's annotation is InvokeTimes, invoke the method multiple times! 
         for (Method method : methods) {
-            // if method's annotation is InvokeTimes
+            
             if (method.isAnnotationPresent(InvokeTimes.class)) {
-                // gets times from method's annotation
+                
                 InvokeTimes invokeTimesAnnotation = method.getAnnotation(InvokeTimes.class);
 
-                // loops times
                 for (int i = 0; i < invokeTimesAnnotation.times(); i++) {
                     method.invoke(null);
                 }
@@ -46,13 +46,11 @@ public class Main {
     }
 }
 
-
-// ========= CREATION =========
-// @Target          -> can apply to selected values (field,method,class)
-// @Retention       -> available at
-//                  -> SOURCE   - be got rid of before compile time
-//                  -> CLASS    - stays in compile time but be got rid of before runtime
-//                  -> RUNTIME  - stays throughout program
+// @Target          -> Can apply to selected values (field,method,class)
+// @Retention       -> Available at
+//                  -> SOURCE   - Be got rid of before compile time
+//                  -> CLASS    - Stays in compile time but be got rid of before runtime
+//                  -> RUNTIME  - Stays throughout program
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @interface StaticField {

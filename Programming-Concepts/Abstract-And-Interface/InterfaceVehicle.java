@@ -1,3 +1,7 @@
+// Interface:
+// It is inherited by using `implement` keyword.
+// One class can implement multiple interfaces.
+// It contain only abstract methods (abstract keyword hidden).
 public interface InterfaceVehicle {
     void start();
     void stop();
@@ -21,6 +25,7 @@ class Car implements InterfaceVehicle {
     }
 }
 
+// Example Implementation:
 class Bike implements InterfaceVehicle {
     private String model;
 

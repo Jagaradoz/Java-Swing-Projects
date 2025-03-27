@@ -13,16 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
-// MOCKITO
-// allows you to create mock objects for testing
+// Mockito.
+// Allows you to create mock objects for testing.
 
 @ExtendWith(MockitoExtension.class)
 class PersonTest {
-    // @Mock                                    -> mock instance of the class (except constructor , static)
-    // @Spy                                     -> doesn't mock the class (constructor, static) but we can stub/mock specific methods
-    // @InjectMocks                             -> automatically injects mocks spies based on @Mock @Spy
-    // @Captor                                  -> capture arguments of a method call (work only with verify)
-    // @ExtendWith(MockitoExtension.class)      -> initialize @Mock and @Spy automatically
+    // @Mock.                                    -> Mock instance of the class (except constructor, static).
+    // @Spy.                                     -> Doesn't mock the class (constructor, static) but we can stub/mock specific methods.
+    // @InjectMocks.                             -> Automatically injects mocks/spies based on @Mock and @Spy.
+    // @Captor.                                  -> Captures arguments of a method call (works only with verify).
+    // @ExtendWith(MockitoExtension.class).      -> Initializes @Mock and @Spy automatically.
 
     @Mock
     private Pet pet;
@@ -38,7 +38,7 @@ class PersonTest {
 
     @BeforeEach
     public void setUp() {
-        // equivalent to @ExtendWith(MockitoExtension.class)
+        // Equivalent to @ExtendWith(MockitoExtension.class).
         openMocks(this);
 
         person = new Person("John Doe", 30, pet, work);
@@ -47,17 +47,17 @@ class PersonTest {
     @Test
     @DisplayName("Should demonstrate various Mockito features")
     public void testMockitoFeatures() {
-        // when().thenReturn()          -> stubbing a method in mocks  (doesn't call real method)
-        // when().thenAnswer()          -> stubbing a method in mocks with more flexibility
-        // doReturn().when()            -> stubbing a method in spies (call real method and overwrite return)
+        // when().thenReturn().          -> Stubs a method in mocks (doesn't call real method).
+        // when().thenAnswer().          -> Stubs a method in mocks with more flexibility.
+        // doReturn().when().            -> Stubs a method in spies (calls real method and overwrites return).
         when(pet.getName()).thenReturn("Golden Retriever");
         when(work.getTitle()).thenAnswer(invocation -> "Software Developer");
         doReturn(50000.0).when(work).getSalary();
 
-        // doNothing()                  -> stub void methods to do nothing
-        // doCallRealMethod()           -> forces a mock to call the real void method
-        // doThrow()                    -> stub void methods to throw an exception
-        // doAnswer()                   -> stub void methods with more flexibility
+        // doNothing().                  -> Stubs void methods to do nothing.
+        // doCallRealMethod().           -> Forces a mock to call the real void method.
+        // doThrow().                    -> Stubs void methods to throw an exception.
+        // doAnswer().                   -> Stubs void methods with more flexibility.
         doNothing().when(pet).feed();
         doCallRealMethod().when(work).doWork();
         doThrow(new IllegalStateException("Pet is sleeping")).when(pet).play();
@@ -75,10 +75,10 @@ class PersonTest {
         person.getWork().doWork();
         person.getPet().eat("treats");
 
-        // verify()                             -> verify that a method was called with specific arguments and specific times
-        // verify(... , never())                -> verify that a method was never called
-        // verify(... , times(2))               -> verify that a method was called exactly 2 times
-        // verify().<method>(captor.capture())  -> verify that a method was called and capture the arguments
+        // verify().                             -> Verifies that a method was called with specific arguments and specific times.
+        // verify(..., never()).                 -> Verifies that a method was never called.
+        // verify(..., times(2)).                -> Verifies that a method was called exactly 2 times.
+        // verify().<method>(captor.capture()).  -> Verifies that a method was called and captures the arguments.
         verify(pet).feed();
         verify(work, never()).getTitle();
         verify(pet, times(2)).eat(stringCaptor.capture());

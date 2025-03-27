@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        // PRIMITIVE TYPES
+        // Primitive types
         boolean var1 = true;
         byte var2 = 'A';
         char var3 = 'A';
@@ -10,7 +10,7 @@ public class Main {
         float var7 = 1.0F;
         double var8 = 1.0D;
 
-        // WRAPPER CLASSES
+        // Wrapper classes
         Boolean var9 = true;
         Byte var10 = 'A';
         Character va11 = 'A';
@@ -20,24 +20,24 @@ public class Main {
         Float var15 = 1.0F;
         Double var16 = 1.0D;
 
-        // STRING (IMMUTABLE)
+        // String (immutable)
         String str1 = "Hello World";
         String str2 = new String("Hello World");
 
-        // STRING (MUTABLE)
-        // StringBuilder used for multi-threaded (asynchronously)
-        // StringBuffer used for single-threaded (synchronously)
+        // String (mutable)
+        // StringBuilder used for multi-threaded (asynchronously).
+        // StringBuffer used for single-threaded (synchronously).
         StringBuilder stringBuilder = new StringBuilder("Hello");
         StringBuffer stringBuffer = new StringBuffer("Hello");
 
-        // METHODS
-        // .append()            -> Adds texts at the end
-        // .insert()            -> Inserts " Java" at index 5
-        // .replace()           -> Replaces characters from index 0 to 4 with "Hi"
-        // .delete()            -> Deletes characters from index 0 to 2
-        // .deleteCharAt()      -> Deletes the character at index 2
-        // .reverse()           -> Reverses the content of sb
-        // .setLength()        -> Adjusts the length to 10
+        // Methods:
+        // .append()           -> Adds text at the end.
+        // .insert()           -> Inserts " Java" at index 5.
+        // .replace()          -> Replaces characters from index 0 to 4 with "Hi".
+        // .delete()           -> Deletes characters from index 0 to 2.
+        // .deleteCharAt()     -> Deletes the character at index 2.
+        // .reverse()          -> Reverses the content of sb.
+        // .setLength()        -> Adjusts the length to 10.
         stringBuilder.append("World ").append(123);
         stringBuilder.insert(5, " Java");
         stringBuilder.replace(0, 5, "Hi");

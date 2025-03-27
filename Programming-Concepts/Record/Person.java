@@ -1,5 +1,5 @@
-// RECORD
-// A special class introduced in Java to represent immutable data objects.
+// Record:
+// It's a special class introduced in Java to represent immutable data objects.
 // Key features of records:
 // - All fields are `final` by default (cannot be changed once set).
 // - Automatically provides the constructor, `toString`, `equals`, and `hashCode` methods.

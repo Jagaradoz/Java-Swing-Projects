@@ -4,22 +4,21 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// JUNIT TEST (Class)
+// JUnit test (class)
 // @DisplayName             -> Specifies a custom name for class , method
 // @TestInstance            -> Specifies the lifecycle of the test class (PER_CLASS,PER_METHOD)
-//                          -> PER_CLASS (create an instance once only)
-//                          -> PER_METHOD (create an instance everytime before every test method)
+//                          -> PER_CLASS (Create an instance once only)
+//                          -> PER_METHOD (Create an instance every time before every test method)
 @DisplayName("Initialize MainTest")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class MainTest {
-    // JUNIT TEST (Method)
-    // @Test                -> used for test method
-    // @Nested              -> groups test methods in one class
-    // @BeforeAll           -> runs once before processing every test
-    // @BeforeEach          -> runs before processing any test method
-    // @AfterEach           -> runs after processing any test method
-    // @AfterAll            -> runs once after processing every test
-
+    // JUnit test (method)
+    // @Test                -> Used for test method.
+    // @Nested              -> Groups test methods in one class.
+    // @BeforeAll           -> Runs once before processing every test.
+    // @BeforeEach          -> Runs before processing any test method.
+    // @AfterEach           -> Runs after processing any test method.
+    // @AfterAll            -> Runs once after processing every test.
 
     private Main main;
 

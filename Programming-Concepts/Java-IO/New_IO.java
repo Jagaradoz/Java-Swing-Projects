@@ -6,8 +6,8 @@ import java.net.InetSocketAddress;
 
 public class New_IO {
     public static void main(String[] args) throws IOException {
-        // ========= FILES =========
-        // handles files with better optimization
+        // Files:
+        // It handles files with better optimization
         Path path = Paths.get("./test/test3.txt");
         Path done = Files.createFile(path);
 
@@ -21,13 +21,13 @@ public class New_IO {
         Files.delete(Paths.get("./test8.txt"));
 
 
-        // ========= CHANNELS =========
+        // Channels:
         // FileChannel      -> used for managing files
         // SocketChannel    -> used for communicate through network (TCP, TCP/IP)
         FileChannel fileChannel = FileChannel.open(Paths.get(".test/test9.txt"), StandardOpenOption.READ);
         SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("example.com", 80));
 
-        // ========= BUFFERS =========
+        // Buffers
         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
         CharBuffer charBuffer = CharBuffer.allocate(100);
         IntBuffer intBuffer = IntBuffer.allocate(5);
@@ -35,17 +35,17 @@ public class New_IO {
         DoubleBuffer doubleBuffer = DoubleBuffer.allocate(5);
         LongBuffer longBuffer = LongBuffer.allocate(5);
 
-        // CHANNEL WITH BUFFER EXAMPLES
+        // Channel with buffer example
 
-        // adding data into buffer
+        // Adding data into buffer
         byteBuffer.put(new byte[]{1, 2, 3});
         byteBuffer.put((byte) 'a');
         int bytesRead = fileChannel.read(byteBuffer);
 
-        // reset pos and limitation values after adding data
+        // Reset pos and limitation values after adding data
         byteBuffer.flip();
 
-        // read data
+        // Read data
         while (byteBuffer.hasRemaining()) {
             System.out.print((char) byteBuffer.get());
         }

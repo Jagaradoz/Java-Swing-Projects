@@ -1,3 +1,5 @@
+// Generics:
+// It can hold more than one type parameter, allowing different types for key and value.
 public class Pair<K, V> {
     private K key;
     private V value;

@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        // MEMORY MANAGEMENT
+        // Memory Layout
 
         // 1. Method Area (Stores static and class-level data.)
         // - Stores class-level data such as method code, static variables, and runtime constant pool.

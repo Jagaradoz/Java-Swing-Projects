@@ -1,10 +1,10 @@
 package application;
 
 public class Main {
-    // Addition method
-    // Subtraction method
-    // Multiplication method
-    // Division method
+    // Addition Method
+    // Subtraction Method
+    // Multiplication Method
+    // Division Method
 
     public int add(int a, int b) {
         return a + b;

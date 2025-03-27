@@ -1,5 +1,5 @@
-// LAMBDA EXPRESSIONS
-// Convert an anonymous function to a shorter form: () -> {}
+// Lambda Expressions:
+// It converts an anonymous function to a shorter form: () -> {}
 // Functional Interface:
 // - Only one abstract method is needed
 // - Default,static methods/variables are ignored

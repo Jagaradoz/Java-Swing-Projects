@@ -1,6 +1,6 @@
 package config;
 
 public class LayoutConfig {
-    // SCREEN WIDTH
+    // Screen width.
     public static int SCREEN_WIDTH = 275;
 }

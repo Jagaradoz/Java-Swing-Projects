@@ -32,21 +32,23 @@ public class CalculatorPanel extends JPanel {
     private final Font font30px;
 
     public CalculatorPanel() {
-        // RESET VALUES
+        // Reset values.
         resetNumC();
 
-        // LOAD FONT
+        // Load font.
         Font mainFont = StyleUtils.getFont();
         font24px = mainFont.deriveFont(24f);
         font30px = mainFont.deriveFont(30f);
 
-        displayPlaceHolderBar = generateDisplayPlaceHolderBarBar();
+        // Assign components.
+        displayPlaceHolderBar = generateDisplayPlaceHolderBar();
         displayBar = generateDisplayBar();
         buttonsPanel = generateButtonsPanel();
 
         setBackground(StyleConfig.LIGHT_BG);
         setBorder(new EmptyBorder(10, 10, 10, 10));
 
+        // Add child components.
         setLayout(new BorderLayout(0, 0));
         add(displayPlaceHolderBar, BorderLayout.NORTH);
         add(displayBar, BorderLayout.CENTER);
@@ -54,16 +56,13 @@ public class CalculatorPanel extends JPanel {
     }
 
     public void resetNumCE() {
+        // If num2 is 0, reset num1; otherwise, reset num2.
         if (num2.equals("0")) {
-            // IF NUM2 IS 0, RESET NUM1
             num1 = "0";
             displayBar.setText(num1);
-
         } else {
-            // RESET NUM2
             num2 = "0";
             displayBar.setText(num2);
-
         }
     }
 
@@ -74,6 +73,7 @@ public class CalculatorPanel extends JPanel {
         operator = "";
         calculated = false;
 
+        // If the component is assigned, reset it.
         if (displayBar != null && displayPlaceHolderBar != null) {
             displayBar.setText("0");
             displayPlaceHolderBar.setText("0");
@@ -84,6 +84,7 @@ public class CalculatorPanel extends JPanel {
         Double number1DoubleValue = Double.parseDouble(num1);
         Double number2DoubleValue = Double.parseDouble(num2);
 
+        // Evaluate the numbers.
         switch (operator) {
             case "+":
                 result = Double.toString(number1DoubleValue + number2DoubleValue);
@@ -104,7 +105,6 @@ public class CalculatorPanel extends JPanel {
     }
 
     public void setNum2() {
-        // SET NUM2
         num2 = displayBar.getText();
     }
 
@@ -117,6 +117,7 @@ public class CalculatorPanel extends JPanel {
     public void backspace() {
         String displayBarText = displayBar.getText();
 
+        // Delete the last digit from display bar.
         if (displayBarText.length() <= 1) {
             displayBar.setText("0");
         } else {
@@ -125,6 +126,7 @@ public class CalculatorPanel extends JPanel {
     }
 
     public void numberInput(String text, String displayBarText) {
+        // If starting with 0, change it; otherwise append it.
         if (displayBarText.equals("0")) {
             displayBar.setText(text);
         } else {
@@ -133,12 +135,12 @@ public class CalculatorPanel extends JPanel {
     }
 
     public void setNum1() {
-        // ONLY INPUT NUMBER1 ONCE
+        // Only input num1 once.
         if (num1.equals("0")) {
             num1 = displayBar.getText();
         }
 
-        // INPUT PLACEHOLDER BAR WHETHER CALCULATED OR NOT
+        // Input placeholder bar whether calculated or not.
         if (calculated) {
             result = getRemovedZeroDecimal(result);
             num1 = result;
@@ -147,6 +149,7 @@ public class CalculatorPanel extends JPanel {
     }
 
     public String getRemovedZeroDecimal(String number) {
+        // Remove if there XX.000...
         if (number.contains(".")) {
             if (number.substring(number.indexOf(".") + 1).equals("0")) {
                 return number.substring(0, number.indexOf("."));
@@ -172,7 +175,7 @@ public class CalculatorPanel extends JPanel {
         return textField;
     }
 
-    public JTextField generateDisplayPlaceHolderBarBar() {
+    public JTextField generateDisplayPlaceHolderBar() {
         JTextField textField = new JTextField("0");
         textField.setForeground(Color.GRAY);
         textField.setBackground(StyleConfig.LIGHT_BG);
@@ -224,14 +227,14 @@ public class CalculatorPanel extends JPanel {
 
     public class ButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            // TEXT FROM BUTTON
-            // TEXT FROM DISPLAY BAR
+            // Text from button.
+            // Text from display bar.
             String text = e.getActionCommand();
             String displayBarText = displayBar.getText();
 
             try {
                 if (text.charAt(0) >= '0' && text.charAt(0) <= '9') {
-                    // IF CALCULATED WILL CLEAR VALUES
+                    // If calcultion is complete, clear the input.
                     if (calculated) {
                         resetNumC();
                         numberInput(text, "");
@@ -240,22 +243,22 @@ public class CalculatorPanel extends JPanel {
                         calculated = false;
                     }
                 } else if (text.equals(".") && !displayBarText.contains(".")) {
-                    // INPUT DECIMAL POINT
+                    // Input decimal point.
                     displayBar.setText(displayBarText + text);
                     calculated = false;
 
                 } else if (text.equals("+") || text.equals("-") || text.equals("×") || text.equals("÷") || text.equals("%")) {
-                    // SET NUM1
+                    // Set num1.
                     setNum1();
                     displayPlaceHolderBar.setText(num1 + " " + text);
 
-                    // RESET AFTER INPUT OPERATOR
+                    // Reset after input operator.
                     setOperator(text);
 
                 } else if (text.equals("=")) {
-                    // SET NUM2
+                    // Set num2.
 
-                    // IF CALCULATED WILL SET NUM1, OTHERWISE WILL SET NUM
+                    // If calculation is complete, set num1, otherwise set num2.
                     if (calculated) {
                         setNum1();
                         displayPlaceHolderBar.setText(num1 + " " + text);
@@ -263,24 +266,24 @@ public class CalculatorPanel extends JPanel {
                         setNum2();
                     }
 
-                    // CALCULATE
+                    // Caclulate.
                     calculate();
 
-                    // DISPLAY RESULT
+                    // Display the result.
                     calculated = true;
                     displayBar.setText(getRemovedZeroDecimal(result));
                     displayPlaceHolderBar.setText(String.format("%s %s %s =", num1, operator, num2));
 
                 } else if (text.equals("←")) {
-                    // BACKSPACE
+                    // Input backspace.
                     backspace();
 
                 } else if (text.equals("C")) {
-                    // CLEAR CALCULATOR
+                    // Clear calculator.
                     resetNumC();
 
                 } else if (text.equals("CE")) {
-                    // RESET NUM1 OR NUM2
+                    // Reset num1 or num2.
                     resetNumCE();
                 }
             } catch (NumberFormatException _) {

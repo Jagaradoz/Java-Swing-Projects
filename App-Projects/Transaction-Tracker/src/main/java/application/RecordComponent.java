@@ -27,30 +27,30 @@ public class RecordComponent extends JPanel implements Serializable {
     private final JLabel expenseLabel;
 
     public RecordComponent(TransactionTrackerPanel transactionTrackerPanel, String id, String detail, int income, int expense) {
-        // SET DEFAULT VALUES
+        // Set default values.
         this.transactionTrackerPanel = transactionTrackerPanel;
         this.id = id;
         this.income = income;
         this.expense = expense;
 
-        // GENERATE DATE TIME
+        // Generate date and time.
         LocalDate date = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
         String dateStr = date.format(formatter);
 
-        // SET RECORD LAYOUT
+        // Set record layout.
         setLayout(new GridLayout(1, 4));
         setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, StyleConfig.LINE_COLOR));
         setPreferredSize(new Dimension(LayoutConfig.SCREEN_WIDTH, 30));
         setMaximumSize(new Dimension(LayoutConfig.SCREEN_WIDTH, 30));
 
-        // GENERATE LABELS
+        // Generate labels.
         dateLabel = generateLabel(dateStr);
         detailLabel = generateLabel(detail);
         incomeLabel = generateLabel(income == 0 ? "-" : String.valueOf(income));
         expenseLabel = generateLabel(expense == 0 ? "-" : "-" + expense);
 
-        // SET TEXT COLORS
+        // Set text colors.
         incomeLabel.setForeground(Color.GREEN);
         expenseLabel.setForeground(Color.RED);
 
@@ -59,7 +59,7 @@ public class RecordComponent extends JPanel implements Serializable {
         add(incomeLabel);
         add(expenseLabel);
 
-        // ADD RECORD SELECTION LISTENER
+        // Add record selection listener.
         addMouseListener(new SelectRecordListener());
     }
 
@@ -77,7 +77,7 @@ public class RecordComponent extends JPanel implements Serializable {
     }
 
     public void setTransactionTrackerPanel(TransactionTrackerPanel transactionTrackerPanel) {
-        // SET TRANSACTION TRACKER PANEL VALUE
+        // Set transaction tracker panel value.
         this.transactionTrackerPanel = transactionTrackerPanel;
     }
 
@@ -112,7 +112,7 @@ public class RecordComponent extends JPanel implements Serializable {
     public class SelectRecordListener extends MouseAdapter implements Serializable {
         @Override
         public void mouseClicked(MouseEvent e) {
-            // SET THIS RECORD TO BE SELECTED
+            // Set this record to be selected.
             transactionTrackerPanel.setSelectedRecord(RecordComponent.this);
         }
     }

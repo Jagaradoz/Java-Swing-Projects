@@ -36,7 +36,7 @@ public class TransactionTrackerPanel extends JPanel {
     private final Font font14f;
 
     public TransactionTrackerPanel() {
-        // INITIALIZE UTILS AND FONTS
+        // Initialize units and fonts.
         records = new ArrayList<>();
 
         mainFont = StyleUtils.getFont();
@@ -48,23 +48,23 @@ public class TransactionTrackerPanel extends JPanel {
         add(generateFinancialEntryPanel(), BorderLayout.NORTH);
         add(generateListPanel(), BorderLayout.CENTER);
 
-        // LOAD SAVED DATA
+        // Load saved data.
         loadData();
     }
 
     public void loadData() {
-        // FIND DATA FOLDER
+        // Find data folder.
         File dataFolder = new File("data");
         if (!dataFolder.exists()) return;
 
-        // READ .ser FILE AND STORE IN RECORDS
+        // Read .ser fiel and sotre in record.
         for (File file : Objects.requireNonNull(dataFolder.listFiles())) {
             if (file.isFile()) {
                 try (ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(file))) {
                     RecordComponent record = (RecordComponent) objectIn.readObject();
                     record.setTransactionTrackerPanel(this);
 
-                    // CALCULATE TOTAL INCOME AND TOTAL EXPENSE
+                    // Calculate total income, expense.
                     sumIncome += record.getIncome();
                     sumExpense += record.getExpense();
 
@@ -75,7 +75,7 @@ public class TransactionTrackerPanel extends JPanel {
             }
         }
 
-        // UPDATE UI
+        // Update UI.
         updatePanelForScrollPane();
         updateHeaderListPanel();
     }
@@ -90,7 +90,7 @@ public class TransactionTrackerPanel extends JPanel {
         File dataFolder = new File("data");
         if (!dataFolder.exists()) return;
 
-        // DELETE ALL .ser FILES
+        // Delete all .ser files.
         for (File file : Objects.requireNonNull(dataFolder.listFiles())) {
             @SuppressWarnings("unused")
             boolean deleted = file.delete();
@@ -102,14 +102,14 @@ public class TransactionTrackerPanel extends JPanel {
     }
 
     public void deleteSelectedRecord() {
-        // SELECT RECORD TO DELETE
+        // Select record to delete.
         if (SELECTED_RECORD != null) {
             File dataFolder = new File("data");
             if (!dataFolder.exists()) return;
 
             File targetFile = null;
 
-            // LOOP THROUGH DATA FOLDER TO FIND SELECTED RECORD
+            // Loop through data folder to find selected record.
             for (File file : Objects.requireNonNull(dataFolder.listFiles())) {
                 if (file.getName().equals(SELECTED_RECORD.getId() + ".ser")) {
                     targetFile = file;
@@ -117,18 +117,18 @@ public class TransactionTrackerPanel extends JPanel {
                 }
             }
 
-            // DELETE RECORD
+            // Delete record.
             if (targetFile != null && targetFile.exists()) {
                 @SuppressWarnings("unused")
                 boolean deleted = targetFile.delete();
             }
 
-            // REMOVE SELECTED RECORD FROM RECORDS
+            // Remove selected record from records.
             records.remove(SELECTED_RECORD);
             deleteButton.setEnabled(false);
             SELECTED_RECORD = null;
 
-            // UPDATE UI
+            // Update UI.
             updatePanelForScrollPane();
             updateHeaderListPanel();
         }
@@ -143,7 +143,7 @@ public class TransactionTrackerPanel extends JPanel {
         sumIncome = 0;
         sumExpense = 0;
 
-        // ADD RECORDS TO SCROLL PANE PANEL
+        // Add records to scroll pane panels.
         panelForScrollPane.removeAll();
         for (RecordComponent recordComponent : records) {
             sumIncome += recordComponent.getIncome();
@@ -157,7 +157,7 @@ public class TransactionTrackerPanel extends JPanel {
     }
 
     public void setSelectedRecord(RecordComponent record) {
-        // SET SELECTED
+        // Set selected.
         SELECTED_RECORD = record;
         if (SELECTED_RECORD != null) {
             SELECTED_RECORD.setSelected(true);
@@ -174,7 +174,7 @@ public class TransactionTrackerPanel extends JPanel {
 
         JPanel headerPanel = generateHeaderListPanel();
 
-        // PANEL FOR STORING RECORDS
+        // Panel for storing records.
         panelForScrollPane = new JPanel();
         panelForScrollPane.setBackground(StyleConfig.BG);
         panelForScrollPane.setLayout(new BoxLayout(panelForScrollPane, BoxLayout.Y_AXIS));
@@ -308,39 +308,39 @@ public class TransactionTrackerPanel extends JPanel {
     }
 
     public RecordComponent addRecord(String detailText, String incomeText, String expenseText) {
-        // IF DETAIL IS BLANK WILL RETURN
+        // If detail is blank, return it.
         if (detailText.isBlank() || detailText.isEmpty()) return null;
 
         int income = 0;
         int expense = 0;
 
-        // EITHER INCOME OR EXPENSE WILL BE VALUED
+        // Either incomeor expense can input.
         if (!incomeText.isBlank() && !incomeText.isEmpty()) income = Integer.parseInt(incomeText);
         else if (!expenseText.isBlank() && !expenseText.isEmpty()) expense = Integer.parseInt(expenseText);
         else return null;
 
-        // RANDOM ID
+        // Random Id
         String id = UUID.randomUUID().toString();
 
         RecordComponent newRecord = new RecordComponent(this, id, detailText, income, expense);
 
         records.add(newRecord);
 
-        // UPDATE UI
+        // Update UI
         updatePanelForScrollPane();
         updateHeaderListPanel();
 
         String pathFileName = String.format("%s.ser", id);
 
-        // WRITE RECORD INTO .ser FILE
+        // Write record into .ser file.
         try (ObjectOutputStream objectOut = new ObjectOutputStream(
                 new FileOutputStream("data/" + pathFileName))) {
             objectOut.writeObject(newRecord);
 
-            // CLEAR INPUT
+            // Clear Input.
             clearInput();
 
-            // RETURN NEW RECORD FOR TESTING
+            // Return new record for testing.
             return newRecord;
         } catch (IOException ex) {
             System.out.println("Error writing object to file: " + ex.getMessage());
@@ -358,12 +358,12 @@ public class TransactionTrackerPanel extends JPanel {
         public void keyTyped(KeyEvent e) {
             char c = e.getKeyChar();
 
-            // ONLY INPUT 0-9 NUMBERS
+            // Only input 0-9 numbers
             if (c < '0' || c > '9') {
                 e.consume();
             }
 
-            // EITHER INCOME OR EXPENSE WILL BE VALUED
+            // Either incomeor expense can input.
             if (e.getSource() == incomeTextField) {
                 expenseTextField.setText("");
             } else if (e.getSource() == expenseTextField) {

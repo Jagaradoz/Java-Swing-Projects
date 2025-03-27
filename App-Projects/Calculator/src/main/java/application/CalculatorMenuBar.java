@@ -25,27 +25,27 @@ public class CalculatorMenuBar extends JMenuBar {
     private final Font font14px;
 
     public CalculatorMenuBar(JFrame mainFrame, CalculatorPanel mainPanel) {
-        // SET FRAME (MainFrame)
-        // SET PANEL (CalculatorPanel)
+        // Set frame (MainFrame).
+        // Set panel (CalculatorPanel).
         this.mainFrame = mainFrame;
         this.mainPanel = mainPanel;
 
-        // SET BUTTONS PANEL
-        // SET DISPLAY BAR
-        // SET DISPLAY PLACEHOLDER BAR
+        // Set buttons panel.
+        // Set display bar.
+        // Set display placeholder bar.
         this.buttonsPanel = mainPanel.getButtonsPanel();
         this.displayBar = mainPanel.getDisplayBar();
         this.displayPlaceHolderBar = mainPanel.getDisplayPlaceHolderBar();
 
-        // LOAD FONT
+        // Load font.
         mainFont = StyleUtils.getFont();
         font14px = mainFont.deriveFont(14f);
 
-        // SET BACKGROUND / BORDER
+        // Set background and border.
         setBackground(StyleConfig.LIGHT_BG);
         setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        // ADD COMPONENTS
+        // Add components.
         add(getViewJMenu());
         add(getHelpJMenu());
     }
@@ -53,16 +53,16 @@ public class CalculatorMenuBar extends JMenuBar {
     public void switchTheme() {
         isDarkMode = !isDarkMode;
 
-        // CHANGE MAIN PANEL BACKGROUND COLOR
+        // Change main panel background color.
         mainPanel.setBackground(isDarkMode ? StyleConfig.DARK_BG : StyleConfig.LIGHT_BG);
 
-        // CHANGE DISPLAY BAR AsND DISPLAY PLACEHOLDER BAR BACKGROUND COLOR
+        // Change display bar and display placeholder bar background color.
         displayBar.setBackground(isDarkMode ? StyleConfig.DARK_BG : StyleConfig.LIGHT_BG);
         displayBar.setForeground(isDarkMode ? StyleConfig.DARK_TEXT : StyleConfig.LIGHT_TEXT);
         displayPlaceHolderBar.setBackground(isDarkMode ? StyleConfig.DARK_BG : StyleConfig.LIGHT_BG);
         displayPlaceHolderBar.setForeground(isDarkMode ? StyleConfig.DARK_PLACEHOLDER : StyleConfig.LIGHT_PLACEHOLDER);
 
-        // CHANGE BUTTON BACKGROUND COLOR
+        // Change button background color.
         buttonsPanel.setBackground(isDarkMode ? StyleConfig.DARK_BG : StyleConfig.LIGHT_BG);
         for (int i = 0; i < buttonsPanel.getComponents().length; i++) {
             if (buttonsPanel.getComponent(i) instanceof JButton button) {
@@ -76,7 +76,7 @@ public class CalculatorMenuBar extends JMenuBar {
             }
         }
 
-        // CHANGE MENU BAR BACKGROUND COLOR
+        // Change menu bar background color.
         JMenuBar menuBar = mainFrame.getJMenuBar();
         menuBar.setBackground(isDarkMode ? StyleConfig.DARK_BG : StyleConfig.LIGHT_BG);
         for (int i = 0; i < menuBar.getMenuCount(); i++) {
@@ -100,7 +100,7 @@ public class CalculatorMenuBar extends JMenuBar {
         menu.setFont(mainFont);
         menu.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // IMAGE ICONS
+        // Image Icons
         URL lightModeUrl = getClass().getResource("/images/light-mode.png");
         URL nightModeUrl = getClass().getResource("/images/night-mode.png");
 

@@ -48,16 +48,18 @@ public class HangmanJPanel extends JPanel {
     }
 
     public void setUp() {
-        // SET PANEL LAYOUT
+        // Set panel layout.
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(StyleConfig.BG);
         setOpaque(true);
 
+        // Assign components.
         JPanel imagePanel = getImagePanel();
         JPanel settingPanel = getSettingPanel();
         JPanel textPanel = getTextPanel();
         keyboardPanel = getKeyBoardPanel();
 
+        // Add child components.
         add(imagePanel);
         add(Box.createVerticalStrut(10));
         add(textPanel);
@@ -68,17 +70,13 @@ public class HangmanJPanel extends JPanel {
     }
 
     public void startGame() {
-        // CLEAR GUESSES ARRAY LIST
-        // SET GAME FINISH FALSE
-        // RANDOM WORD
+        // Clear and reset everything for a starting game.
         guesses.clear();
         gameFinished = false;
         setWord(words.get(rand.nextInt(words.size())));
 
-        // RESET WORD PANEL
         resetWordLabels();
 
-        // RESET KEYBOARD PANEL
         if (keyboardPanel != null) {
             for (Component c : keyboardPanel.getComponents()) {
                 if (c instanceof JButton button) {
@@ -88,16 +86,13 @@ public class HangmanJPanel extends JPanel {
             }
         }
 
-        // RESET IMAGE
         updateImage("/images/1.png");
 
-        // RESET WRONG LABEL
         if (wrongLabel != null) {
             wrongLabel.setText("Wrong: 0/6");
         }
 
 
-        // REFRESH UI
         revalidate();
         repaint();
 
@@ -118,7 +113,7 @@ public class HangmanJPanel extends JPanel {
     }
 
     public void checkLetter() {
-        // CHECK IF LETTER IS CORRECT
+        // Check if the letter is correct.
         for (int i = 0; i < word.length(); i++) {
             if (guesses.contains(word.charAt(i))) {
                 if (i < wordLabels.size()) { // Check if the index is within the bounds of wordLabels
@@ -129,7 +124,7 @@ public class HangmanJPanel extends JPanel {
     }
 
     public void checkWrong() {
-        // CHECK WRONG LETTER IN GUESSES ARRAY LIST
+        // Check the wrong letter in guesses array list.
         int wrongGuesses = 0;
         for (char guess : guesses) {
             if (!word.contains(String.valueOf(guess))) {
@@ -137,7 +132,7 @@ public class HangmanJPanel extends JPanel {
             }
         }
 
-        // CHANGE IMAGES
+        // Change images.
         switch (wrongGuesses) {
             case 1 -> updateImage("/images/2.png");
             case 2 -> updateImage("/images/3.png");
@@ -147,11 +142,11 @@ public class HangmanJPanel extends JPanel {
             case 6 -> updateImage("/images/7.png");
         }
 
-        // IF WRONG 6/6 WILL FINISH GAME
+        // If wrong 6/6, finish the game.
         if (wrongGuesses >= 6) {
             gameFinished = true;
 
-            // APPEAR RED LETTERS
+            // Appear red letters.
             for (int i = 0; i < word.length(); i++) {
                 if (!guesses.contains(word.charAt(i))) {
                     if (i < wordLabels.size()) {
@@ -168,7 +163,7 @@ public class HangmanJPanel extends JPanel {
     }
 
     public void checkWin() {
-        // CHECK IF ALL LETTERS ARE CORRECT
+        // Check if all letters are correct.
         boolean won = true;
         for (char letter : word.toCharArray()) {
             if (!guesses.contains(letter)) {
@@ -177,16 +172,14 @@ public class HangmanJPanel extends JPanel {
             }
         }
 
-        // CHECK WINNING
+        // Check winning.
         if (won) {
             gameFinished = true;
 
-            // TURN ALL LETTERS IN GREEN
             for (JLabel wordLabel : wordLabels) {
                 wordLabel.setForeground(Color.GREEN);
             }
 
-            // IF ZERO WRONG , IT GIVES PERFECT TEXT
             int wrongGuesses = 0;
             for (char guess : guesses) {
                 if (!word.contains(String.valueOf(guess))) {
@@ -204,7 +197,6 @@ public class HangmanJPanel extends JPanel {
     }
 
     public void updateImage(String path) {
-        //  UPDATE IMAGE
         ImageIcon newImage = new ImageIcon(Objects.requireNonNull(getClass().getResource(path)));
         imageLabel.setIcon(newImage);
     }
@@ -222,7 +214,6 @@ public class HangmanJPanel extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(StyleConfig.BG);
 
-        // IMAGE LABEL
         imageLabel = new JLabel(new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/1.png"))));
         imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(imageLabel);
@@ -234,7 +225,6 @@ public class HangmanJPanel extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(StyleConfig.BG);
 
-        // WORD LABEL
         wordPanel = new JPanel();
         wordPanel.setBackground(StyleConfig.BG);
         wordPanel.setMinimumSize(new Dimension(LayoutConfig.SCREEN_WIDTH - 100, 60));
@@ -250,7 +240,6 @@ public class HangmanJPanel extends JPanel {
             wordPanel.add(wordLabel);
         }
 
-        // WRONG LABEL
         wrongLabel = new JLabel("Wrong: 0/6");
         wrongLabel.setFont(mainFont);
         wrongLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -268,10 +257,9 @@ public class HangmanJPanel extends JPanel {
         panel.setLayout(new FlowLayout());
         panel.setBackground(StyleConfig.BG);
 
-        // START AT A
         char letter = 'A';
 
-        // CREATE A-Z BUTTONS
+        // Create A-Z Buttons.
         for (int i = 0; i < 26; i++) {
             panel.add(getJButton(letter++));
         }
@@ -368,9 +356,9 @@ public class HangmanJPanel extends JPanel {
             if (!gameFinished && !guesses.contains(letter)) {
                 guesses.add(letter);
 
-                // CHECK LETTER
-                // CHECK HOW MANY WRONG
-                // CHECK WIN OR NOT
+                // Check Letter.
+                // Check how many wrong.
+                // Check win or not.
                 checkLetter();
                 checkWrong();
                 checkWin();

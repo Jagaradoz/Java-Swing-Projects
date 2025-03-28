@@ -10,7 +10,7 @@ public class DataUtils {
         try (InputStream inputStream = DataUtils.class.getResourceAsStream("/files/words.txt");
              BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
 
-            // LOAD WORDS INTO ARRAY LIST
+            // Load words into array list.
             String line;
             while ((line = reader.readLine()) != null) {
                 list.add(line.toUpperCase());

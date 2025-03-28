@@ -23,23 +23,23 @@ public class TicTacToePanel extends JPanel {
     private final Font font40f;
 
     public TicTacToePanel() {
-        // INITIALIZE RAND AND BUTTONS
+        // Initializations.
         rand = new Random();
         buttons = new JButton[3][3];
 
-        // SET FONT
+        // Set font.
         mainFont = StyleUtils.getFont();
         font40f = mainFont.deriveFont(40f);
 
-        // SET BACKGROUND
-        // SET LAYOUT
+        // Set background and layout.
         setBackground(StyleConfig.LIGHT_BG);
         setLayout(null);
 
-        // SET GAME LABEL AND GAME PANEL
+        // Assign components.
         gamePanel = generateGamePanel();
         gameLabel = generateGameLabel();
 
+        // Add child components.
         add(gameLabel);
         add(gamePanel);
 
@@ -60,7 +60,7 @@ public class TicTacToePanel extends JPanel {
             }
         }
 
-        // RESET COMPONENTS
+        // Update UI.
         repaint();
         revalidate();
     }
@@ -72,7 +72,7 @@ public class TicTacToePanel extends JPanel {
         int j;
 
         do {
-            // RANDOMIZE I AND J FOR COMPUTER MOVES
+            // Randomize i and j for computer movees.
             i = rand.nextInt(3);
             j = rand.nextInt(3);
         } while (!buttons[i][j].getText().isEmpty());
@@ -90,13 +90,13 @@ public class TicTacToePanel extends JPanel {
     }
 
     public void playerMove(int i, int j) {
-        // CHECK BUTTON IS EMPTY
+        // Check if button text is empty.
         JButton button = buttons[i][j];
         if (button.getText().isEmpty()) {
             button.setText("X");
             button.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
-            // CHECK PLAYER WINS
+            // Check the player wins.
             if (checkWinner()) {
                 gameOver = true;
                 gameLabel.setText("Player X wins");
@@ -104,12 +104,12 @@ public class TicTacToePanel extends JPanel {
                 return;
             }
 
-            // CHECK BOARD IS FULL TO ALLOW COMPUTER MOVE
+            // Check the board is full to allow computer move.
             if (!isBoardFull()) {
                 computerMove();
             }
 
-            // CHECK COMPUTER WINS
+            // Check the computer wins.
             if (checkWinner()) {
                 gameOver = true;
                 gameLabel.setText("Player O wins");
@@ -117,7 +117,7 @@ public class TicTacToePanel extends JPanel {
                 return;
             }
 
-            // CHECK DRAW
+            // Check draw.
             if (isBoardFull() && !gameOver) {
                 gameLabel.setText("DRAW!");
                 disableButtons();
@@ -138,7 +138,7 @@ public class TicTacToePanel extends JPanel {
     }
 
     public boolean checkWinner() {
-        // CHECK ROWS (HORIZONTAL)
+        // Check rows (Horizontal)
         for (int i = 0; i < 3; i++) {
             if (!buttons[i][0].getText().isEmpty() &&
                     buttons[i][0].getText().equals(buttons[i][1].getText()) &&
@@ -154,7 +154,7 @@ public class TicTacToePanel extends JPanel {
             }
         }
 
-        // CHECK COLS (VERTICAL)
+        // Check cols (Vertical)
         for (int j = 0; j < 3; j++) {
             if (!buttons[0][j].getText().isEmpty() &&
                     buttons[0][j].getText().equals(buttons[1][j].getText()) &&
@@ -170,7 +170,7 @@ public class TicTacToePanel extends JPanel {
             }
         }
 
-        // CHECK DIAGONAL (TOP-LEFT TO BOTTOM-RIGHT)
+        // Check diagonal (Top-left to bottom-right)
         if (!buttons[0][0].getText().isEmpty() &&
                 buttons[0][0].getText().equals(buttons[1][1].getText()) &&
                 buttons[1][1].getText().equals(buttons[2][2].getText())) {
@@ -184,7 +184,7 @@ public class TicTacToePanel extends JPanel {
             return true;
         }
 
-        // CHECK DIAGONAL (TOP-RIGHT TO BOTTOM-LEFT)
+        // Check diagonal (Top-right to bottom-left)
         if (!buttons[0][2].getText().isEmpty() &&
                 buttons[0][2].getText().equals(buttons[1][1].getText()) &&
                 buttons[1][1].getText().equals(buttons[2][0].getText())) {

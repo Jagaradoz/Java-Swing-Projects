@@ -20,14 +20,14 @@ public class TicTacToeJMenuBar extends JMenuBar {
     public TicTacToeJMenuBar(TicTacToePanel ticTacToePanel) {
         this.ticTacToePanel = ticTacToePanel;
 
-        // INITIALIZE FONT
+        // Initalize font.
         mainFont = StyleUtils.getFont();
         font14f = mainFont.deriveFont(14f);
 
         setBackground(StyleConfig.LIGHT_BG);
         setBorder(new EmptyBorder(0, 0, 0, 0));
 
-        // ADD MENU ITEMS
+        // Add menu items.
         add(generateGameJMenu());
         add(generateHelpJMenu());
     }
@@ -37,17 +37,17 @@ public class TicTacToeJMenuBar extends JMenuBar {
         gameMenu.setFont(mainFont);
         gameMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-        // MENU ITEMS
+        // Menu items.
         JMenuItem restart = new JMenuItem("Restart");
         JMenuItem whiteTheme = new JMenuItem("White Theme");
         JMenuItem darkTheme = new JMenuItem("Dark Theme");
 
-        // SET FONT
+        // Set font.
         restart.setFont(font14f);
         whiteTheme.setFont(font14f);
         darkTheme.setFont(font14f);
 
-        // SET CURSORS
+        // Set cursors.
         restart.setCursor(new Cursor(Cursor.HAND_CURSOR));
         whiteTheme.setCursor(new Cursor(Cursor.HAND_CURSOR));
         darkTheme.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -99,14 +99,12 @@ public class TicTacToeJMenuBar extends JMenuBar {
     private void switchTheme() {
         TicTacToeJMenuBar.DARK_MODE = !TicTacToeJMenuBar.DARK_MODE;
 
-        // SET CONTAINER BACKGROUND
-        // SET GAME LABEL BACKGROUND
-        // SET GAME PANEL BACKGROUND
+        // Set container, game label, game panel background.
         ticTacToePanel.setBackground(TicTacToeJMenuBar.DARK_MODE ? StyleConfig.DARK_BG : StyleConfig.LIGHT_BG);
         ticTacToePanel.getGameLabel().setForeground(TicTacToeJMenuBar.DARK_MODE ? StyleConfig.DARK_TEXT : StyleConfig.LIGHT_TEXT);
         ticTacToePanel.getGamePanel().setBackground(TicTacToeJMenuBar.DARK_MODE ? StyleConfig.DARK_BG : StyleConfig.LIGHT_BG);
 
-        // SET BUTTONS BACKGROUND
+        // Set button background.
         JButton[][] buttons = ticTacToePanel.getButtons();
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -117,7 +115,7 @@ public class TicTacToeJMenuBar extends JMenuBar {
             }
         }
 
-        // SET MENU BAR BACKGROUND
+        // set menu bar background.
         setBackground(TicTacToeJMenuBar.DARK_MODE ? StyleConfig.DARK_BG : StyleConfig.LIGHT_BG);
         for (int i = 0; i < getMenuCount(); i++) {
             JMenu menu = getMenu(i);
@@ -131,7 +129,7 @@ public class TicTacToeJMenuBar extends JMenuBar {
             }
         }
 
-        // RESET COMPONENTS
+        // Update UI.
         repaint();
         revalidate();
     }

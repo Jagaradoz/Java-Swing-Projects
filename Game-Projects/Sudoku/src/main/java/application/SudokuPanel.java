@@ -44,52 +44,48 @@ public class SudokuPanel extends JPanel {
     private final Font font30f;
 
     public SudokuPanel() {
-        // INITIALIZE FONT
+        // Initializations.
         mainFont = StyleUtils.getFont();
         font14f = mainFont.deriveFont(14f);
         font30f = mainFont.deriveFont(30f);
 
-        // INITIALIZE UTILS
         rand = new Random();
 
-        // INITIALIZE ARRAYS
         correctedBoard = new int[LayoutConfig.GRID_SIZE][LayoutConfig.GRID_SIZE];
         gameBoard = new int[LayoutConfig.GRID_SIZE][LayoutConfig.GRID_SIZE];
         textFields = new JTextField[LayoutConfig.GRID_SIZE][LayoutConfig.GRID_SIZE];
 
-        // GENERATE PANELS
+        // Assign components.
         textPanel = generateTextPanel();
         settingPanel = generateSettingPanel();
         boardPanel = generateBoardPanel();
 
         JPanel mainPanel = generateMainPanel();
 
-        // ADD MAIN PANEL
+        // Add child components.
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
 
-        // START GAME
         startGame();
     }
 
     public void startGame() {
-        // RESET VALUES
+        // Reset all values.
         gameFinished = false;
         wrongCount = 0;
         elapsedTime = 0;
 
-        // RESET ALL LABELS
         wrongLabel.setText("Wrong : 0/3");
         centerLabel.setText("Continuing...");
         centerLabel.setForeground(Color.BLACK);
         timerLabel.setText("00:00");
 
-        // GENERATE CORRECTED BOARD
-        // GENERATE GAME BOARD
+        // Generate corrected board.
+        // Generate game board.
         generateCorrectedBoard();
         generateGameBoard();
 
-        // GENERATE TIMER
+        // Generate timer.
         if (timer == null) {
             timer = new Timer(1000, _ -> {
                 elapsedTime += 1;
@@ -101,12 +97,11 @@ public class SudokuPanel extends JPanel {
             });
         }
 
-        // START TIMER
         timer.start();
     }
 
     public void checkWinGame() {
-        // CHECK ALL NUMBERS IS CORRECT (WIN = TRUE)
+        // Check all numbers are correct (win = true).
         boolean win = true;
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[i].length; j++) {
@@ -117,7 +112,7 @@ public class SudokuPanel extends JPanel {
             }
         }
 
-        // IF WIN = TRUE , SET WIN GAME
+        // If win = true, set win game.
         if (win) {
             gameFinished = true;
 
@@ -129,12 +124,12 @@ public class SudokuPanel extends JPanel {
     }
 
     public void checkLoseGame() {
-        // IF WRONG IS LESS THAN 3 , DO NOTHING
+        // If wrong < 3, do nothing.
         if (wrongCount < 3) {
             return;
         }
 
-        // SET GAME FINISH
+        // Set game finish.
         gameFinished = true;
 
         centerLabel.setText("You lost!");
@@ -142,7 +137,7 @@ public class SudokuPanel extends JPanel {
 
         timer.stop();
 
-        // SET ALL TEXT FIELDS CAN'T BE EDITED
+        // Set all text field can't be edited.
         for (Component component : boardPanel.getComponents()) {
             if (component instanceof JTextField textField) {
                 textField.setEditable(false);
@@ -154,12 +149,12 @@ public class SudokuPanel extends JPanel {
     }
 
     public void generateGameBoard() {
-        // COPY CORRECTED BOARD TO GAME BOARD
+        // Copy corrected board t the game board.
         for (int i = 0; i < correctedBoard.length; i++) {
             System.arraycopy(correctedBoard[i], 0, gameBoard[i], 0, correctedBoard[i].length);
         }
 
-        // MAKE SOME NUMBERS DISAPPEAR
+        // Make some number disappear.
         int count = 40;
         while (count > 0) {
             int row = rand.nextInt(LayoutConfig.GRID_SIZE);
@@ -171,7 +166,7 @@ public class SudokuPanel extends JPanel {
             }
         }
 
-        // CHECK DEFAULT NUMBERS ON THE BOARD , ADJUST APPEARANCE
+        // Check default numbers on the board, adjust appearance.
         for (int i = 0; i < LayoutConfig.GRID_SIZE; i++) {
             for (int j = 0; j < LayoutConfig.GRID_SIZE; j++) {
                 JTextField textField = textFields[i][j];
@@ -192,11 +187,11 @@ public class SudokuPanel extends JPanel {
     }
 
     public void generateCorrectedBoard() {
-        // GENERATE NUMBERS 1-9 ON DIAGONAL BOXES
+        // Generate numbers 1-9 on diagonal boxes first.
         for (int box = 0; box < LayoutConfig.GRID_SIZE; box += 3) {
             int[] arr = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-            // SHUFFLE ARRAY
+            // Shuffle array.
             for (int i = arr.length - 1; i > 0; i--) {
                 int j = rand.nextInt(i + 1);
                 int temp = arr[i];
@@ -204,7 +199,7 @@ public class SudokuPanel extends JPanel {
                 arr[j] = temp;
             }
 
-            // PUT NUMBERS
+            // Assign numbers.
             int index = 0;
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 3; j++) {
@@ -213,7 +208,7 @@ public class SudokuPanel extends JPanel {
             }
         }
 
-        // SOLVE CORRECTED BOARD
+        // Solve the corrected board.
         solveCorrectedBoard(3, 0);
     }
 
@@ -242,26 +237,26 @@ public class SudokuPanel extends JPanel {
     }
 
     public boolean checkAnswer(int i, int j, int number) {
-        // CHECK IF PLAYER INPUT CORRECT NUMBER
+        // Check if the player input the corrected number.
         return correctedBoard[i][j] == number;
     }
 
     public boolean isValidPlacement(int row, int col, int number) {
-        // CHECK IF THERE IS THE NUMBER ON THE ROW
+        // Check i there is the number on the row.
         for (int i = 0; i < LayoutConfig.GRID_SIZE; i++) {
             if (correctedBoard[row][i] == number) {
                 return false;
             }
         }
 
-        // CHECK IF THERE IS THE NUMBER ON THE COLUMN
+        // Check if there is the number on the column.
         for (int i = 0; i < LayoutConfig.GRID_SIZE; i++) {
             if (correctedBoard[i][col] == number) {
                 return false;
             }
         }
 
-        // CHECK IF THERE IS THE NUMBER ON THE BOX
+        // Check if there is the number on the box.
         int localRowBox = row - row % 3;
         int localColBox = col - col % 3;
         for (int i = localRowBox; i < localRowBox + 3; i++) {
@@ -277,7 +272,7 @@ public class SudokuPanel extends JPanel {
     }
 
     public boolean solveCorrectedBoard(int row, int col) {
-        // IF ROW == 9 , MOVE TO ANOTHER COLUMN
+        // If row == 9, move to another column.
         if (row == LayoutConfig.GRID_SIZE) {
             row = 0;
             col++;
@@ -286,19 +281,19 @@ public class SudokuPanel extends JPanel {
             }
         }
 
-        // IF THE BLOCK HAS ALREADY A NUMBER , IT WILL SKIP
+        // If the block has already a number, skip it.
         if (correctedBoard[row][col] != 0) {
             return solveCorrectedBoard(row + 1, col);
         }
 
-        // TRY TO PUT 1-9 NUMBERS ON THE BLOCK
+        // Try to put 1-9 numbers on the block.
         for (int num = 1; num <= LayoutConfig.GRID_SIZE; num++) {
             if (isValidPlacement(row, col, num)) {
                 correctedBoard[row][col] = num;
                 if (solveCorrectedBoard(row + 1, col)) {
                     return true;
                 }
-                correctedBoard[row][col] = 0; // BACK TRACKING
+                correctedBoard[row][col] = 0; // Back tracking.
             }
         }
         return false;
@@ -310,9 +305,9 @@ public class SudokuPanel extends JPanel {
         panel.setBackground(StyleConfig.BG_COLOR);
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
-        // ADD TEXT PANEL
-        // ADD BOARD PANEL
-        // ADD SETTING PANEL
+        // Add text panel.
+        // Add board panel.
+        // Add setting panel.
         panel.add(textPanel);
         panel.add(boardPanel);
         panel.add(settingPanel);
@@ -325,19 +320,16 @@ public class SudokuPanel extends JPanel {
         panel.setMaximumSize(new Dimension(414, 30));
         panel.setBackground(StyleConfig.BG_COLOR);
 
-        // WRONG LABEL
         wrongLabel = new JLabel("Wrong : 0/3");
         wrongLabel.setHorizontalAlignment(JLabel.CENTER);
         wrongLabel.setPreferredSize(new Dimension(100, 30));
         wrongLabel.setFont(font14f);
 
-        // CENTER LABEL
         centerLabel = new JLabel("Continuing...");
         centerLabel.setHorizontalAlignment(JLabel.CENTER);
         centerLabel.setPreferredSize(new Dimension(100, 30));
         centerLabel.setFont(font14f);
 
-        // TIMER LABEL
         timerLabel = new JLabel("00:00");
         timerLabel.setHorizontalAlignment(JLabel.CENTER);
         timerLabel.setPreferredSize(new Dimension(100, 30));
@@ -357,7 +349,6 @@ public class SudokuPanel extends JPanel {
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        // GENERATE TEXT FIELDS AND PUT THEM INTO PANEL , ARRAY
         for (int i = 0; i < LayoutConfig.GRID_SIZE; i++) {
             for (int j = 0; j < LayoutConfig.GRID_SIZE; j++) {
                 JTextField textField = generateJTextField(i, j);
@@ -389,7 +380,6 @@ public class SudokuPanel extends JPanel {
         panel.setPreferredSize(new Dimension(LayoutConfig.SCREEN_WIDTH - 100, 50));
         panel.setMaximumSize(new Dimension(LayoutConfig.SCREEN_WIDTH - 100, 50));
 
-        // RESTART BUTTON
         JButton restart = new JButton("RESTART");
         restart.setBackground(new Color(0, 122, 255));
         restart.setForeground(Color.WHITE);
@@ -401,7 +391,6 @@ public class SudokuPanel extends JPanel {
 
         restart.addActionListener(_ -> startGame());
 
-        // GITHUB BUTTON
         JButton gitHub = new JButton("GitHub");
         gitHub.setFont(mainFont);
         gitHub.setBackground(new Color(0, 122, 255));
@@ -447,14 +436,14 @@ public class SudokuPanel extends JPanel {
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.setBorder(new LineBorder(StyleConfig.LINE_COLOR, 1));
 
-        // MAKE CHESS_BACKGROUND
+        // Make chess-background.
         if ((i / 3 + j / 3) % 2 == 0) {
             textField.setBackground(StyleConfig.GRAY_BG_COLOR);
         } else {
             textField.setBackground(Color.WHITE);
         }
 
-        // IF THE BLOCK HAS NO VALUE (0) , IT WILL ADD KEY LISTENER
+        // If the block has no value (0), it will add key listener.
         if (gameBoard[i][j] != 0) {
             textField.setText(String.valueOf(gameBoard[i][j]));
             textField.setFocusable(false);
@@ -485,7 +474,7 @@ public class SudokuPanel extends JPanel {
             char c = e.getKeyChar();
             int number = Character.getNumericValue(c);
 
-            // ONLY INPUT 1-9 NUMBERS
+            // Only input 1-9 numbers.
             if (c < '1' || c > '9') {
                 e.consume();
                 return;
@@ -494,14 +483,14 @@ public class SudokuPanel extends JPanel {
             textField.setText(String.valueOf(number));
             gameBoard[i][j] = number;
 
-            // CHECK ANSWER EVERY TIME PLAYER INPUT
+            // Check the answer every time the player input.
             if (checkAnswer(i, j, number)) {
                 textField.setForeground(Color.BLUE);
                 checkWinGame();
             } else {
                 textField.setForeground(Color.RED);
 
-                // INCREASE WRONG COUNT
+                // Increase wrong count.
                 wrongCount++;
                 wrongLabel.setText("Wrong : " + wrongCount + "/3");
 
@@ -513,7 +502,7 @@ public class SudokuPanel extends JPanel {
     }
 }
 
-// PRINT BOARD METHOD
+// Print board method:
 //    public void printBoard(int[][] board) {
 //        for (int i = 0; i < LayoutConfig.GRID_SIZE; i++) {
 //            if (i % 3 == 0 && i != 0) {

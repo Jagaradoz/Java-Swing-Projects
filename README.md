@@ -18,6 +18,6 @@ This repository consists of 3 main sections with different purposes:
 
 - **Programming Concepts**: Core Knowledge, Main ideas, And Tricks.
 
-## Show Your Support for This Repository
+## Give This Repository Your Support
 
-If you find this github repository valuable, please consider giving it a star and following for updates. Your encouragement truly keeps me motivated. Thank you so much!
+If you find this GitHub repository helpful, please consider giving it a star and following for updates. Your support means a lot and keeps me motivated. Thank you!
